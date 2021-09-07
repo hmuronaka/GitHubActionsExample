@@ -36,6 +36,6 @@ jobs:
         env:
           TAG_NAME: v${{ github.event.inputs.value1 }}
 
-        uses: ./.github/actions/myaction
+        uses: ./.github/actions/myaction.yml
         with:
           value1: $TAG_NAME
