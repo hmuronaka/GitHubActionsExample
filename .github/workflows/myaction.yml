@@ -1,0 +1,12 @@
+name: My Action
+description: Action Sample
+inputs:
+  value1:
+    description: TEST
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run a one-line script
+      run: echo ${{ inputs.value1 }}
