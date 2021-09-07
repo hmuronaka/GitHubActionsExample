@@ -25,4 +25,5 @@ jobs:
           echo ${{ github.event.inputs.value1 || 'DMMY' }}
           echo ${{ github.event.inputs.value1 && env.TAG_NAME }}
           echo ${{ (github.event.inputs.value1 && env.TAG_NAME) || 'DMMY' }}
+          echo ${{ github.event.inputs.value1 && Release env.TagNAME }}
           
