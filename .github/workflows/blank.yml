@@ -18,8 +18,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: test-expression
+        env:
+          TAG_NAME: v${{ github.event.inputs.value1 }}
         run: |
           echo ${{ github.event.inputs.value1 }}
           echo ${{ github.event.inputs.value1 || 'DMMY' }}
-          echo ${{ (github.event.inputs.value1 && join(['v', github.event.inputs.value1])) }}
-          echo ${{ (github.event.inputs.value1 && join(['v', github.event.inputs.value1])) || 'DMMY2' }}
+          echo ${{ env.TAG_NAME }}
