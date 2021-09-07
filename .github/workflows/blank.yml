@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+
+name: test
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    inputs:
+      value1:
+        description: 'value1'
+        required: false
+       
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    runs-on: mac-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: test-expression
+        run: |
+          echo ${{ github.event.inputs.value1 }}
+          echo ${{ github.event.inputs.value1 || "DMMY" }}
