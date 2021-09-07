@@ -11,3 +11,4 @@ runs:
   steps:
     - name: Run a one-line script
       run: echo ${{ inputs.value1 }}
+      shell: bash
