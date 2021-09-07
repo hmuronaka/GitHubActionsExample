@@ -27,7 +27,7 @@ jobs:
           echo ${{ (github.event.inputs.value1 && env.TAG_NAME) || 'DMMY' }}
           echo ${{ 'Release $TAG_NAME' }}
           echo ${{ github.event.inputs.value1 && 'Release $TAG_NAME' }}
-          echo ${{ join(['a', 'b']) }}
+          echo ${{ github.event.inputs.value1 && format('Release {0}', $TAG_NAME) }}
           
   test-action:
     runs-on: macos-latest
@@ -46,6 +46,12 @@ jobs:
         uses: ./.github/actions/myaction
         with:
           value1: ${{ 'Release $TAG_NAME' }} 
+      - name: test3
+        env:
+          TAG_NAME: v${{ github.event.inputs.value1 }}
+        uses: ./.github/actions/myaction
+        with:
+          value1: ${{ format('Release {0}', $TAG_NAME) }} 
           
           
           
