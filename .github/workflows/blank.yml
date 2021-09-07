@@ -20,4 +20,4 @@ jobs:
       - name: test-expression
         run: |
           echo ${{ github.event.inputs.value1 }}
-          echo ${{ github.event.inputs.value1 || "DMMY" }}
+          echo ${{ github.event.inputs.value1 || 'DMMY' }}
