@@ -21,5 +21,5 @@ jobs:
         run: |
           echo ${{ github.event.inputs.value1 }}
           echo ${{ github.event.inputs.value1 || 'DMMY' }}
-          echo ${{ (github.event.inputs.value1 && join('v', github.event.inputs.value1)) }}
-          echo ${{ (github.event.inputs.value1 && join('v', github.event.inputs.value1)) || 'DMMY2' }}
+          echo ${{ (github.event.inputs.value1 && join(['v', github.event.inputs.value1])) }}
+          echo ${{ (github.event.inputs.value1 && join(['v', github.event.inputs.value1])) || 'DMMY2' }}
