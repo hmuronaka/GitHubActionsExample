@@ -23,4 +23,6 @@ jobs:
         run: |
           echo ${{ github.event.inputs.value1 }}
           echo ${{ github.event.inputs.value1 || 'DMMY' }}
-          echo ${{ env.TAG_NAME }}
+          echo ${{ github.event.inputs.value1 && env.TAG_NAME }}
+          echo ${{ (github.event.inputs.value1 && env.TAG_NAME) || 'DMMY' }}
+          
