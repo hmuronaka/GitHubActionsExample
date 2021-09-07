@@ -4,6 +4,7 @@ inputs:
   value1:
     description: TEST
     required: true
+    default: VALUE1
 
 runs:
   using: "composite"
