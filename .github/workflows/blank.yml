@@ -9,14 +9,16 @@ on:
       value1:
         description: 'value1'
         required: false
-       
+        default: 'T-AUTO'
+  push:
+    branches: ['main']       
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   test:
     runs-on: macos-latest
     env:
-      global-value1: GLOBAL
+      global1: GLOBAL
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: test-expression
@@ -30,10 +32,12 @@ jobs:
           echo ${{ 'Release $TAG_NAME' }}
           echo ${{ github.event.inputs.value1 && 'Release $TAG_NAME' }}
           echo ${{ github.event.inputs.value1 && format('Release {0}', env.TAG_NAME) }}
-          echo ${{ github.event.inputs.value1 && format('Release {0} {1}', env.global-value1, env.TAG_NAME) }}
+          echo ${{ github.event.inputs.value1 && format('Release {0} {1}', env.global1, env.TAG_NAME) }}
           
   test-action:
     runs-on: macos-latest
+    env:
+      global2: GLOBAL    
     steps:
       - name: Check out repository
         uses: actions/checkout@v2 
@@ -54,7 +58,7 @@ jobs:
           TAG_NAME: v${{ github.event.inputs.value1 }}
         uses: ./.github/actions/myaction
         with:
-          value1: ${{ format('Release {0} {1}', env.TAG_NAME, env.global-value1) }} 
+          value1: ${{ format('Release {0} {1}', env.TAG_NAME, env.global2) }} 
           
           
           
