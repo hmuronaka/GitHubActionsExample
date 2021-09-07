@@ -35,7 +35,15 @@ jobs:
       - name: test
         env:
           TAG_NAME: v${{ github.event.inputs.value1 }}
-
         uses: ./.github/actions/myaction
         with:
           value1: $TAG_NAME
+      - name: test2
+        env:
+          TAG_NAME: v${{ github.event.inputs.value1 }}
+        uses: ./.github/actions/myaction
+        with:
+          value1: ${{ 'Release $TAG_NAME' }} 
+          
+          
+          
