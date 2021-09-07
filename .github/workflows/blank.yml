@@ -19,11 +19,13 @@ jobs:
     runs-on: macos-latest
     env:
       global1: GLOBAL
+      has-value1: ${{ github.event.inputs.value1 == 'true' }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: test-expression
         env:
           TAG_NAME: v${{ github.event.inputs.value1 }}
+          
         run: |
           echo ${{ github.event.inputs.value1 }}
           echo ${{ github.event.inputs.value1 || 'DMMY' }}
@@ -33,6 +35,7 @@ jobs:
           echo ${{ github.event.inputs.value1 && 'Release $TAG_NAME' }}
           echo ${{ github.event.inputs.value1 && format('Release {0}', env.TAG_NAME) }}
           echo ${{ github.event.inputs.value1 && format('Release {0} {1}', env.global1, env.TAG_NAME) }}
+          echo ${{ (env.has-value1 && format('HAD {0}', env.has-value1)) || format('NO {0}', env.has-value1 }}
           
   test-action:
     runs-on: macos-latest
