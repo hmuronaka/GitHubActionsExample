@@ -38,4 +38,4 @@ jobs:
 
         uses: ./.github/actions/myaction
         with:
-          value1: $TAG_NAME
+          value1: TAG_NAME
