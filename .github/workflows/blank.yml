@@ -74,7 +74,45 @@ jobs:
           echo 11 ${{ (env.false-value2 && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
           echo 12 ${{ (env.false-value2 != 'true' && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
           echo 13 ${{ (env.false-value2 == env.false-value2 && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
+          
+      - name: bool test-2
+        env:
+          true-value1: true
+          true-value2: ${{ true }}
+          false-value1: false
+          false-value2: ${{ false }}
+          one: 1
+          zero: 0
+        run: |
+          # trueに対してtest
 
+          echo ${{ (true && 'result: true') || result: false }} # result: true
+          echo ${{ env.true-value1 && format('result: true {0}', env.true-value1) }} # result: true true
+          echo ${{ env.true-value1 == true }} # false
+          echo ${{ env.true-value1 == 'true' }} # true
+          echo ${{ env.true-value1 == env.true-value2 }} # true
+
+          echo ${{ 1 == true }} # true
+          echo ${{ env.one == true }} # true
+          echo ${{ 1 == 'true' }} # false
+          echo ${{ env.one == 1 }} # true
+          echo ${{ env.one == '1' }} #
+
+          # falseに対してtest   
+
+          echo ${{ (false && 'result: true') || result: false }} # result: false
+          echo ${{ ('false' && 'result: true') || result: false }} # result: true
+          echo ${{ env.false-value1 && format('result: true {0}', env.false-value1) }}# result: true false
+
+          echo ${{ 0 == false }} # true
+          echo ${{ 0 == 'false' }} # false
+          echo ${{ env.zero == false }} # true
+          echo ${{ env.zero == 0 }} # true
+          echo ${{ env.zero == '0' }} #
+
+          echo ${{ env.false-value1 == false }} # false
+          echo ${{ env.false-value1 == 'false' }} # true
+          echo ${{ env.false-value1 == env.false-value2 }} # true
           
   test-action:
     runs-on: macos-latest
