@@ -86,7 +86,7 @@ jobs:
         run: |
           # trueに対してtest
 
-          echo ${{ (true && 'result: true') || result: false }} # result: true
+          echo ${{ (true && 'result: true') || 'result: false' }} # result: true
           echo ${{ env.true-value1 && format('result: true {0}', env.true-value1) }} # result: true true
           echo ${{ env.true-value1 == true }} # false
           echo ${{ env.true-value1 == 'true' }} # true
@@ -100,8 +100,8 @@ jobs:
 
           # falseに対してtest   
 
-          echo ${{ (false && 'result: true') || result: false }} # result: false
-          echo ${{ ('false' && 'result: true') || result: false }} # result: true
+          echo ${{ (false && 'result: true') || 'result: false' }} # result: false
+          echo ${{ ('false' && 'result: true') || 'result: false' }} # result: true
           echo ${{ env.false-value1 && format('result: true {0}', env.false-value1) }}# result: true false
 
           echo ${{ 0 == false }} # true
