@@ -10,6 +10,11 @@ on:
         description: 'value1'
         required: false
         default: 'T-AUTO'
+      bool-value1:
+        description: 'bool-value'
+        required: false
+        default: true
+        
   push:
     branches: ['main']       
 
@@ -21,6 +26,11 @@ jobs:
       global1: GLOBAL
       has-value1: ${{ github.event.inputs.value1 == 'true' }}
       cast-has-value1: ${{ github.event.inputs.value1 == true }}
+      true-value1: true
+      false-value1: false
+      true-value2: ${{ true }}
+      false-value2: ${{ false }}
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: test-expression
@@ -38,6 +48,25 @@ jobs:
           echo ${{ github.event.inputs.value1 && format('Release {0} {1}', env.global1, env.TAG_NAME) }}
           echo ${{ (env.has-value1 && format('HAD {0}', env.has-value1)) || format('NO {0}', env.has-value1) }}
           echo ${{ (env.cast-has-value1 && format('HAD {0}', env.cast-has-value1)) || format('NO {0}', env.cast-has-value1) }}
+    
+      - name: test-bool-value
+        run: |
+          echo ${{ (env.true-value1 && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
+          echo ${{ (env.true-value1 == 'true' && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
+          echo ${{ (env.true-value1 == env.true-value2 && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
+          
+          echo ${{ (env.true-value2 && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
+          echo ${{ (env.true-value2 == 'true' && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
+          echo ${{ (env.true-value2 == env.true-value2 && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
+
+          echo ${{ (env.false-value1 && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
+          echo ${{ (env.false-value1 == 'true' && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
+          echo ${{ (env.false-value1 == env.false-value2 && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
+          
+          echo ${{ (env.false-value2 && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
+          echo ${{ (env.false-value2 != 'true' && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
+          echo ${{ (env.false-value2 == env.false-value2 && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
+
           
   test-action:
     runs-on: macos-latest
