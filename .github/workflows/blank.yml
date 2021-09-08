@@ -99,6 +99,8 @@ jobs:
           echo 9 ${{ 1 == 'true' }} # false
           echo 10 ${{ env.one == 1 }} # true
           echo 11 ${{ env.one == '1' }} # true
+          
+          echo 11-2 ${{ 1 && 'result: true' }} # result: true
 
           # falseに対してtest   
 
@@ -117,9 +119,9 @@ jobs:
           echo 22 ${{ env.false-value1 == 'false' }} # true
           echo 23 ${{ env.false-value1 == env.false-value2 }} # true
 
-          echo 24 ${{ 0 && 'result: true' }} # false
-          echo 25 ${{ '0' && 'result: true' }} # false
-          echo 26 ${{ env.zero && 'result: true' }} # false
+          echo 24 ${{ 0 && 'result: true' }} # 0
+          echo 25 ${{ '0' && 'result: true' }} # result: true
+          echo 26 ${{ env.zero && 'result: true' }} # result: true
 
 
   test-action:
