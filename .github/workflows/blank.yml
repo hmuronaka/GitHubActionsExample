@@ -86,34 +86,42 @@ jobs:
         run: |
           # trueに対してtest
 
-          echo ${{ (true && 'result: true') || 'result: false' }} # result: true
-          echo ${{ env.true-value1 && format('result: true {0}', env.true-value1) }} # result: true true
-          echo ${{ env.true-value1 == true }} # false
-          echo ${{ env.true-value1 == 'true' }} # true
-          echo ${{ env.true-value1 == env.true-value2 }} # true
+          echo 1 ${{ (true && 'result: true') || 'result: false' }} # result: true
+          echo 2 ${{ env.true-value1 && format('result: true {0}', env.true-value1) }} # result: true true
+          echo 3 ${{ env.true-value1 == true }} # false
+          echo 4 ${{ env.true-value1 == 'true' }} # true
+          echo 5 ${{ env.true-value1 == env.true-value2 }} # true
+          echo 6 ${{ env.true-value2 && format('result: true {0}', env.true-value1) }} # result: true true
+         
 
-          echo ${{ 1 == true }} # true
-          echo ${{ env.one == true }} # true
-          echo ${{ 1 == 'true' }} # false
-          echo ${{ env.one == 1 }} # true
-          echo ${{ env.one == '1' }} #
+          echo 7 ${{ 1 == true }} # true
+          echo 8 ${{ env.one == true }} # true
+          echo 9 ${{ 1 == 'true' }} # false
+          echo 10 ${{ env.one == 1 }} # true
+          echo 11 ${{ env.one == '1' }} # true
 
           # falseに対してtest   
 
-          echo ${{ (false && 'result: true') || 'result: false' }} # result: false
-          echo ${{ ('false' && 'result: true') || 'result: false' }} # result: true
-          echo ${{ env.false-value1 && format('result: true {0}', env.false-value1) }}# result: true false
+          echo 12 ${{ (false && 'result: true') || 'result: false' }} # result: false
+          echo 13 ${{ ('false' && 'result: true') || 'result: false' }} # result: true
+          echo 14 ${{ env.false-value1 && format('result: true {0}', env.false-value1) }}# result: true false
+          echo 15 ${{ env.false-value2 && format('result: true {0}', env.false-value1) }}# result: true false
 
-          echo ${{ 0 == false }} # true
-          echo ${{ 0 == 'false' }} # false
-          echo ${{ env.zero == false }} # true
-          echo ${{ env.zero == 0 }} # true
-          echo ${{ env.zero == '0' }} #
+          echo 16 ${{ 0 == false }} # true
+          echo 17 ${{ 0 == 'false' }} # false
+          echo 18 ${{ env.zero == false }} # true
+          echo 19 ${{ env.zero == 0 }} # true
+          echo 20 ${{ env.zero == '0' }} # true
 
-          echo ${{ env.false-value1 == false }} # false
-          echo ${{ env.false-value1 == 'false' }} # true
-          echo ${{ env.false-value1 == env.false-value2 }} # true
-          
+          echo 21 ${{ env.false-value1 == false }} # false
+          echo 22 ${{ env.false-value1 == 'false' }} # true
+          echo 23 ${{ env.false-value1 == env.false-value2 }} # true
+
+          echo 24 ${{ 0 && 'result: true' }} # false
+          echo 25 ${{ '0' && 'result: true' }} # false
+          echo 26 ${{ env.zero && 'result: true' }} # false
+
+
   test-action:
     runs-on: macos-latest
     env:
