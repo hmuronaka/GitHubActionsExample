@@ -51,21 +51,25 @@ jobs:
     
       - name: test-bool-value
         run: |
-          echo ${{ (env.true-value1 && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
-          echo ${{ (env.true-value1 == 'true' && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
-          echo ${{ (env.true-value1 == env.true-value2 && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
+          echo ${{ ( true && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
+        
+          echo 1 ${{ (env.true-value1 && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
+          echo 2 ${{ (env.true-value1 == 'true' && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
+          echo 3 ${{ (env.true-value1 == env.true-value2 && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
           
-          echo ${{ (env.true-value2 && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
-          echo ${{ (env.true-value2 == 'true' && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
-          echo ${{ (env.true-value2 == env.true-value2 && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
+          echo 4 ${{ (env.true-value2 && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
+          echo 5 ${{ (env.true-value2 == 'true' && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
+          echo 6 ${{ (env.true-value2 == env.true-value2 && format('TRUE {0}', env.true-value2)) || format('FALSE {0}', env.true-value2) }}
 
-          echo ${{ (env.false-value1 && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
-          echo ${{ (env.false-value1 == 'true' && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
-          echo ${{ (env.false-value1 == env.false-value2 && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
+          echo 7 ${{ ( false && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
+
+          echo 8 ${{ (env.false-value1 && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
+          echo 9 ${{ (env.false-value1 != 'true' && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
+          echo 10 ${{ (env.false-value1 == env.false-value2 && format('TRUE {0}', env.false-value1)) || format('FALSE {0}', env.false-value1) }}
           
-          echo ${{ (env.false-value2 && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
-          echo ${{ (env.false-value2 != 'true' && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
-          echo ${{ (env.false-value2 == env.false-value2 && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
+          echo 11 ${{ (env.false-value2 && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
+          echo 12 ${{ (env.false-value2 != 'true' && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
+          echo 13 ${{ (env.false-value2 == env.false-value2 && format('TRUE {0}', env.false-value2)) || format('FALSE {0}', env.false-value2) }}
 
           
   test-action:
