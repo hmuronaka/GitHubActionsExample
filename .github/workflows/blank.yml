@@ -55,6 +55,7 @@ jobs:
           echo ${{ ( true && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
           echo ${{ ( env.true-value1 == true && 'result: true' ) || 'result: false' }}
           echo ${{ ( env.one == true && 'result: true' ) || 'result: false' }}
+          echo ${{ ( 1 == true && 'result: true' ) || 'result: false' }}
         
           echo 1 ${{ (env.true-value1 && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
           echo 2 ${{ (env.true-value1 == 'true' && format('TRUE {0}', env.true-value1)) || format('FALSE {0}', env.true-value1) }}
